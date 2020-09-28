@@ -51,7 +51,7 @@ async def listmul(list):
 async def liconascii(list):
     strtohex = ""
     for i in list :
-        strtohex += "0x"+hex(ord(i))
+        strtohex += hex(ord(i))+","
     return strtohex
 
 @app.get("/asc")
