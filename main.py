@@ -183,6 +183,8 @@ def youtube_search(text):
     result = ''
     for a in t:
         href = a.a['href']
+        if not "youtube" in href :
+            continue
         head = a.h3.text
         result = result + head + '<br>' + href + '<br><br>'
         i += 1
