@@ -176,7 +176,7 @@ def youtube_search(text):
     res = requests.get(url, headers = headers)
     soup = BeautifulSoup(res.content, 'html.parser')
     
-    t = soup.findAll('a',attrs={'class':'yt-uix-tile-link'})
+    t = soup.findAll('yt-formatted-string')
     i = 0
     result = ''
     for a in t:
