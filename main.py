@@ -50,8 +50,13 @@ async def listmul(list):
 @app.get("/listconascii")
 async def liconascii(list):
     strtohex = ""
+    ch = False
     for i in list :
-        strtohex += hex(ord(i))+","
+        if ch :
+            strtohex += ","
+        strtohex += hex(ord(i))
+        ch = True
+            
     return strtohex
 
 @app.get("/asc")
