@@ -172,21 +172,20 @@ def youtube_search(text):
         'Connection': 'keep-alive',
         'Upgrade-Insecure-Requests': '1'
     }
-    url = 'https://www.google.com/search?q=' + str(text)
+    url = 'https://www.youtube.com/results?search_query=' + str(text)
     res = requests.get(url, headers = headers)
     soup = BeautifulSoup(res.content, 'html.parser')
     
-    t = soup.findAll('div', {'class':"r"})
+    t = soup.findAll('a',attrs={'class':'yt-uix-tile-link'})
     i = 0
     result = ''
     for a in t:
         href = a.a['href']
-        if "youtube" in href :
-            head = a.h3.text
-            result = result + head + '<br>' + href + '<br><br>'
-            i += 1
-            if(i >= 5):
-                break
+        head = a.h3.text
+        result = result + head + '<br>' + href + '<br><br>'
+        i += 1
+        if(i >= 5):
+            break
     
     return(result)
 
