@@ -177,13 +177,12 @@ def youtube_search(text):
 #source= requests.get(url).text
     res = requests.get(url, headers = headers)
     soup=BeautifulSoup(source,'lxml')
-    div_s = soup.findAll('div') 
+    div_s = soup.findAll('span',class_='watch-title') 
     i = 0
     result = ''
     for a in div_s:
-        Title = a.find('span',class_='watch-title').text.strip()
         href = a.a['href']
-        head = Title
+        head = a.h3.text
         result = result + head + '<br>' + href + '<br><br>'
         i += 1
         if(i >= 5):
