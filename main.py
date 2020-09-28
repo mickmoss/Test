@@ -31,6 +31,14 @@ async def add(a: int = 0, b: int = 0):
 async def mul(a: int = 0, b: int = 0):
     return a*b
 
+
+
+def tonumlist(li):
+    ls = li.split(',')
+    for i in range(len(ls)):
+        ls[i] = float(ls[i])
+    return list(ls)
+
 @app.get("/listmul")
 async def listmul(list):
     total = 1
@@ -39,11 +47,12 @@ async def listmul(list):
         total = total *i
     return total
 
-def tonumlist(li):
-    ls = li.split(',')
-    for i in range(len(ls)):
-        ls[i] = float(ls[i])
-    return list(ls)
+@app.get("/listconascii")
+async def liconascii(list):
+    strtohex = ""
+    for i in list :
+        strtohex += "0x"+hex(ord(i))
+    return strtohex
 
 @app.get("/asc")
 async def asc(li):
