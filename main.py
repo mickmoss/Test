@@ -31,6 +31,13 @@ async def add(a: int = 0, b: int = 0):
 async def mul(a: int = 0, b: int = 0):
     return a*b
 
+@app.get("/listmul")
+async def listmul(list):
+    total = 1;
+    li = list.split(",")
+    for i in li :
+        t = t *(int)i
+    return t
 
 def tonumlist(li):
     ls = li.split(',')
