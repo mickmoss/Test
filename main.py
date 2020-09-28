@@ -176,7 +176,7 @@ def youtube_search(text):
 
 #source= requests.get(url).text
     res = requests.get(url, headers = headers)
-    soup=BeautifulSoup(source,'lxml')
+    soup=BeautifulSoup(source,'html.parser')
     div_s = soup.findAll('span',class_='watch-title') 
     i = 0
     result = ''
