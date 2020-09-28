@@ -172,15 +172,16 @@ def youtube_search(text):
         'Connection': 'keep-alive',
         'Upgrade-Insecure-Requests': '1'
     }
-    url = 'https://www.youtube.com/results?search_query=' + str(text)
+    url = 'https://www.google.com/search?tbm=vid&ei=sqpxX_Eon5KvvA-i3ZrYDg&q='+str(text)+'&oq=' + str(text)
 
 #source= requests.get(url).text
     res = requests.get(url, headers = headers)
-    soup=BeautifulSoup(source,'html.parser')
-    div_s = soup.findAll('span',class_='watch-title') 
+    soup = BeautifulSoup(res.content, 'html.parser')
+    
+    t = soup.findAll('div', {'class':"r"})
     i = 0
     result = ''
-    for a in div_s:
+    for a in t:
         href = a.a['href']
         head = a.h3.text
         result = result + head + '<br>' + href + '<br><br>'
@@ -189,7 +190,7 @@ def youtube_search(text):
             break
     
     return(result)
-    
+
 
 if __name__ == '__main__':
    uvicorn.run(app, host="0.0.0.0", port=80, debug=True)
