@@ -164,7 +164,7 @@ def google_search(text):
 def youtube_search(text):
     
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:81.0) Gecko/20100101 Firefox/81.0',
+        'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language': 'en-US,en;q=0.5',
         'Accept-Encoding': 'gzip, deflate',
@@ -172,22 +172,25 @@ def youtube_search(text):
         'Connection': 'keep-alive',
         'Upgrade-Insecure-Requests': '1'
     }
-    url = 'https://www.youtube.com/results?search_query=' + str(text)
+    url = 'https://www.youtube.com/?search_query=' + str(text)
+
+#source= requests.get(url).text
     res = requests.get(url, headers = headers)
-    soup = BeautifulSoup(res.content, 'html.parser')
-    
-    t = soup.findAll('yt-formatted-string')
+    soup=BeautifulSoup(source,'lxml')
+    div_s = soup.findAll('div') 
     i = 0
     result = ''
-    for a in t:
+    for a in div_s:
+        Title = a.find('span',class_='watch-title').text.strip()
         href = a.a['href']
-        head = a.h3.text
+        head = Title
         result = result + head + '<br>' + href + '<br><br>'
         i += 1
         if(i >= 5):
             break
     
     return(result)
+    
 
 if __name__ == '__main__':
    uvicorn.run(app, host="0.0.0.0", port=80, debug=True)
