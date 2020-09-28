@@ -6,6 +6,7 @@ import uvicorn
 import numpy as np
 import re
 import requests
+import math
 from bs4 import BeautifulSoup
 from fastapi.responses import PlainTextResponse
 
@@ -74,6 +75,12 @@ async def min(li):
     ls = tonumlist(li)
     return np.amin(ls)
 
+
+@app.get("/pow")
+async def pow(a:int = 0,b:int = 0):
+    return math.pow(a,b)
+
+
 @app.get("/validation-ctzid")
 async def validation_ctzid(text):
     if(len(text) != 13):
@@ -134,4 +141,5 @@ def google_search(text):
 
 
 if __name__ == '__main__':
-   uvicorn.run(app, host="0.0.0.0", port=80, debug=True) 
+   uvicorn.run(app, host="0.0.0.0", port=80, debug=True)
+   
