@@ -52,7 +52,7 @@ async def liconascii(list):
     strtohex = ""
     for i in list :
         strtohex += hex(ord(i))+","
-    return strtohex
+    return total
 
 @app.get("/asc")
 async def asc(li):
