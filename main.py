@@ -36,8 +36,8 @@ async def listmul(list):
     total = 1
     li = tonumlist(list)
     for i in li :
-        t = t *i
-    return t
+        total = total *i
+    return total
 
 def tonumlist(li):
     ls = li.split(',')
