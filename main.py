@@ -80,7 +80,6 @@ async def min(li):
 async def pow(a:int = 0,b:int = 0):
     return math.pow(a,b)
 
-
 @app.get("/validation-ctzid")
 async def validation_ctzid(text):
     if(len(text) != 13):
